@@ -28,7 +28,7 @@ public:
 void mMeshTutorialApp::setup()
 {
     // setup cameras
-	mCamera = CameraPersp(getWindowWidth(), getWindowHeight(), 60.0f, 50.0f, 10000.0f);
+	mCamera = CameraPersp(getWindowWidth(), getWindowHeight(), 75.0f, 50.0f, 10000.0f);
 	mCamera.setEyePoint( Vec3f(200.0f, 200.0f, 200.0f) );
 	mCamera.setCenterOfInterestPoint( Vec3f(0.0f, 0.0f, 0.0f) );
 	mMayaCam.setCurrentCam( mCamera );
@@ -95,7 +95,7 @@ void mMeshTutorialApp::mouseDrag( MouseEvent event )
 void mMeshTutorialApp::resize()
 {
     // now tell our Camera that the window aspect ratio has changed
-	mCamera.setPerspective( 60, getWindowAspectRatio(), 1, 1000 );
+	mCamera.setPerspective( 75.0f, getWindowAspectRatio(), 1, 1000 );
 	
 	// and in turn, let OpenGL know we have a new camera
 	gl::setMatrices( mCamera );
