@@ -18,23 +18,7 @@ public:
 
 void MeshTutorialApp::setup()
 {
-}
-
-void MeshTutorialApp::mouseDown( MouseEvent event )
-{
-}
-
-void MeshTutorialApp::update()
-{
-}
-
-void MeshTutorialApp::draw()
-{
-	// clear out the window with black
-	gl::clear( Color( 0, 0, 0 ) );
-    
-    
-    
+        
     // Position and Color for the four corners
     mesh.appendVertex( Vec3f( 10, 10, 0 ) );
     mesh.appendColorRgb( Color( 1, 0, 0 ) );
@@ -54,6 +38,21 @@ void MeshTutorialApp::draw()
     // Two triangles to create our square
     mesh.appendTriangle( vIdx0, vIdx1, vIdx2 );
     mesh.appendTriangle( vIdx0, vIdx2, vIdx3 );
+}
+
+void MeshTutorialApp::mouseDown( MouseEvent event )
+{
+}
+
+void MeshTutorialApp::update()
+{
+}
+
+void MeshTutorialApp::draw()
+{
+	// clear out the window with black
+	gl::clear( Color( 0, 0, 0 ) );
+
     
     gl::draw(mesh);
     
