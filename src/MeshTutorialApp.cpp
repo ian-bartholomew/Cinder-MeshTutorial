@@ -160,6 +160,7 @@ void mMeshTutorialApp::draw()
 	// clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
 
+    gl::enableWireframe();
     
     gl::draw(mMesh);
     
