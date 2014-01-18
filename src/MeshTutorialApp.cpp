@@ -55,35 +55,35 @@ void mMeshTutorialApp::setup()
     
     mVboMesh->bufferIndices(indices);
     
-    mPositions.push_back(Vec3f(100, 200, 1));
-    mPositions.push_back(Vec3f( 200, 200, 1));
-    mPositions.push_back(Vec3f( 200, 100, 1));
-    mPositions.push_back(Vec3f(100, 100, 1));
+    mPositions.push_back(Vec3f(100, 200, 1));       // indx1
+    mPositions.push_back(Vec3f( 200, 200, 1));      // indx2
+    mPositions.push_back(Vec3f( 200, 100, 1));      // indx3
+    mPositions.push_back(Vec3f(100, 100, 1));       // indx4
     
-    mPositions.push_back(Vec3f( 200, 200, 1));
-    mPositions.push_back(Vec3f( 200, 200, 100));
-    mPositions.push_back(Vec3f( 200, 100, 100));
-    mPositions.push_back(Vec3f( 200, 100, 1));
+    mPositions.push_back(Vec3f( 200, 200, 1));      // indx2
+    mPositions.push_back(Vec3f( 200, 200, 100));    // indx5
+    mPositions.push_back(Vec3f( 200, 100, 100));    // indx6
+    mPositions.push_back(Vec3f( 200, 100, 1));      // indx3
     
-    mPositions.push_back(Vec3f( 200, 200, 100));
-    mPositions.push_back(Vec3f(100, 200, 100));
-    mPositions.push_back(Vec3f(100, 100, 100));
-    mPositions.push_back(Vec3f( 200, 100, 100));
+    mPositions.push_back(Vec3f( 200, 200, 100));    // indx5
+    mPositions.push_back(Vec3f(100, 200, 100));     // indx7
+    mPositions.push_back(Vec3f(100, 100, 100));     // indx8
+    mPositions.push_back(Vec3f( 200, 100, 100));    // indx6
     
-    mPositions.push_back(Vec3f(100, 200, 100));
-    mPositions.push_back(Vec3f(100, 200, 1));
-    mPositions.push_back(Vec3f(100, 100, 1));
-    mPositions.push_back(Vec3f(100, 100, 100));
+    mPositions.push_back(Vec3f(100, 200, 100));     // indx7
+    mPositions.push_back(Vec3f(100, 200, 1));       // indx1
+    mPositions.push_back(Vec3f(100, 100, 1));       // indx4
+    mPositions.push_back(Vec3f(100, 100, 100));     // indx8
     
-    mPositions.push_back(Vec3f(100, 200, 100));
-    mPositions.push_back(Vec3f( 200, 200, 100));
-    mPositions.push_back(Vec3f( 200, 200, 1));
-    mPositions.push_back(Vec3f(100, 200, 1));
+    mPositions.push_back(Vec3f(100, 200, 100));     // indx7
+    mPositions.push_back(Vec3f( 200, 200, 100));    // indx5
+    mPositions.push_back(Vec3f( 200, 200, 1));      // indx2
+    mPositions.push_back(Vec3f(100, 200, 1));       // indx1
     
-    mPositions.push_back(Vec3f(100, 100, 100));
-    mPositions.push_back(Vec3f( 200, 100, 100));
-    mPositions.push_back(Vec3f( 200, 100, 1));
-    mPositions.push_back(Vec3f(100, 100, 1));
+    mPositions.push_back(Vec3f(100, 100, 100));     // indx8
+    mPositions.push_back(Vec3f( 200, 100, 100));    // indx6
+    mPositions.push_back(Vec3f( 200, 100, 1));      // indx3
+    mPositions.push_back(Vec3f(100, 100, 1));       // indx4
 
 }
 
