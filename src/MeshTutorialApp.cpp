@@ -3,11 +3,13 @@
 #include "cinder/TriMesh.h"
 #include "cinder/MayaCamUI.h"
 
+#include <vector>
+
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class MeshTutorialApp : public AppNative {
+class mMeshTutorialApp : public AppNative {
 public:
 	void setup();
     void resize();
@@ -16,14 +18,14 @@ public:
 	void update();
 	void draw();
     
-    ci::TriMesh mesh;
+    ci::TriMesh mMesh;
     
     // camera
 	MayaCamUI               mMayaCam;
 	CameraPersp             mCamera;
 };
 
-void MeshTutorialApp::setup()
+void mMeshTutorialApp::setup()
 {
     // setup cameras
 	mCamera = CameraPersp(getWindowWidth(), getWindowHeight(), 60.0f, 50.0f, 10000.0f);
@@ -62,35 +64,35 @@ void MeshTutorialApp::setup()
     for (int i = 0; i < 6; i++)
     {
         
-        mesh.appendVertex(faces[i][0]);
-        mesh.appendColorRgb(colors[i][0]);
-        mesh.appendVertex(faces[i][1]);
-        mesh.appendColorRgb(colors[i][1]);
-        mesh.appendVertex(faces[i][2]);
-        mesh.appendColorRgb(colors[i][2]);
-        mesh.appendVertex(faces[i][3]);
-        mesh.appendColorRgb(colors[i][3]);
+        mMesh.appendVertex(faces[i][0]);
+        mMesh.appendColorRgb(colors[i][0]);
+        mMesh.appendVertex(faces[i][1]);
+        mMesh.appendColorRgb(colors[i][1]);
+        mMesh.appendVertex(faces[i][2]);
+        mMesh.appendColorRgb(colors[i][2]);
+        mMesh.appendVertex(faces[i][3]);
+        mMesh.appendColorRgb(colors[i][3]);
         
-        int numberVertices = mesh.getNumVertices();
+        int numberVertices = mMesh.getNumVertices();
         
-        mesh.appendTriangle( numberVertices - 4, numberVertices - 3, numberVertices - 2 );
-        mesh.appendTriangle( numberVertices - 4, numberVertices - 2, numberVertices - 1 );
+        mMesh.appendTriangle( numberVertices - 4, numberVertices - 3, numberVertices - 2 );
+        mMesh.appendTriangle( numberVertices - 4, numberVertices - 2, numberVertices - 1 );
         
     }
 }
 
-void MeshTutorialApp::mouseDown( MouseEvent event )
+void mMeshTutorialApp::mouseDown( MouseEvent event )
 {
     mMayaCam.mouseDown( event.getPos() );
 }
 
-void MeshTutorialApp::mouseDrag( MouseEvent event )
+void mMeshTutorialApp::mouseDrag( MouseEvent event )
 {
 	mMayaCam.mouseDrag( event.getPos(), event.isLeftDown(), event.isMiddleDown(), event.isRightDown() );
 	mCamera = mMayaCam.getCamera();
 }
 
-void MeshTutorialApp::resize()
+void mMeshTutorialApp::resize()
 {
     // now tell our Camera that the window aspect ratio has changed
 	mCamera.setPerspective( 60, getWindowAspectRatio(), 1, 1000 );
@@ -99,19 +101,68 @@ void MeshTutorialApp::resize()
 	gl::setMatrices( mCamera );
 }
 
-void MeshTutorialApp::update()
+void mMeshTutorialApp::update()
 {
+    // update the camera
     gl::setMatrices( mCamera );
+    
+    if( mMesh.getNumVertices() == 0 ) return;
+    
+    // store all the mMesh information
+    
+    std::vector<Color> col = mMesh.getColorsRGB();
+    std::vector<Vec3f> vec = mMesh.getVertices();
+    
+    int i, j;
+    i = mMesh.getNumVertices();
+    j = 0;
+    
+    mMesh.clear();
+    
+    // something to add a little movement
+    float inc = sin( getElapsedSeconds() );
+    
+    while(j < i)
+    {
+        // alter the positions array to get a little dynamism
+        vec.at(j).x -= inc;
+        vec.at(j+1).x += inc;
+        vec.at(j+2).x += inc*2.0f;
+        vec.at(j+3).x -= inc*2.0f;
+        
+        // now replace it in the mMesh
+        mMesh.appendVertex( vec.at(j));
+        mMesh.appendColorRgb( col.at(j) );
+        mMesh.appendVertex( vec.at(j+1));
+        mMesh.appendColorRgb( col.at(j+1) );
+        mMesh.appendVertex( vec.at(j+2));
+        mMesh.appendColorRgb( col.at(j+2) );
+        mMesh.appendVertex( vec.at(j+3));
+        mMesh.appendColorRgb( col.at(j+3) );
+        
+        int vIdx0 = mMesh.getNumVertices() - 4;
+        int vIdx1 = mMesh.getNumVertices() - 3;
+        int vIdx2 = mMesh.getNumVertices() - 2;
+        int vIdx3 = mMesh.getNumVertices() - 1;
+        
+        mMesh.appendTriangle( vIdx0, vIdx1, vIdx2 );
+        mMesh.appendTriangle( vIdx0, vIdx2, vIdx3 );
+        
+        // go to the next triangle pair
+        j+=4;
+    }
+    
+    
 }
 
-void MeshTutorialApp::draw()
+void mMeshTutorialApp::draw()
 {
 	// clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
 
     
-    gl::draw(mesh);
+    gl::draw(mMesh);
     
 }
 
-CINDER_APP_NATIVE( MeshTutorialApp, RendererGl )
+CINDER_APP_NATIVE( mMeshTutorialApp, RendererGl )
